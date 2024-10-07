@@ -24,6 +24,15 @@ namespace Shortly.Infrastructure.Persistence.Repositories
             return addedUrl.Entity;
         }
 
+        public async Task<bool> IsShortUrlExists(string shortenedUrlKey)
+        {
+            var isExists =
+                await _dbContext.ShortUrls
+                    .AnyAsync(url => url.ShortenedUrlKey.Equals(shortenedUrlKey));
+
+            return isExists;
+        }
+
         public Task<List<ShortUrl>> GetAllUrlsAsync()
         {
             var allUrls = _dbContext.ShortUrls.ToListAsync();
