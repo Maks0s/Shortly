@@ -1,6 +1,8 @@
 ﻿using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using Shortly.Application.Common.Behaviors;
+using Shortly.Application.Common.Interfaces.Application.Services;
+using Shortly.Application.ShortUrls.Services;
 using System.Reflection;
 
 namespace Shortly.Application
@@ -19,6 +21,8 @@ namespace Shortly.Application
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             ValidatorOptions.Global.LanguageManager.Enabled = false;
+
+            services.AddScoped<IUrlShorteningService, UrlShorteningService>();
 
             return services;
         }
