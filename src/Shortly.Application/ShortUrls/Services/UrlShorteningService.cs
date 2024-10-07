@@ -18,7 +18,7 @@ namespace Shortly.Application.ShortUrls.Services
             _shortUrlRepository = shortUrlRepository;
         }
 
-        public async Task<string> GenerateShortenedUrlKey()
+        public async Task<string> GenerateShortenedUrlKeyAsync()
         {
             var keyChars = new char[ShortUrlLength];
 

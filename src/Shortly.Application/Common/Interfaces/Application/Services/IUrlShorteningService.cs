@@ -2,6 +2,6 @@
 {
     public interface IUrlShorteningService
     {
-        public Task<string> GenerateShortenedUrlKey();
+        public Task<string> GenerateShortenedUrlKeyAsync();
     }
 }
