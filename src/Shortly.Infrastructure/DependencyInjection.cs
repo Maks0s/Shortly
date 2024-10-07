@@ -1,5 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Shortly.Infrastructure.Persistence.DbContexts;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 
 namespace Shortly.Infrastructure
 {
@@ -20,6 +23,14 @@ namespace Shortly.Infrastructure
                 IConfiguration configuration
             )
         {
+            services.AddDbContext<ShortUrlDbContext>(options =>
+                options.UseMySql(
+                        configuration.GetConnectionString("DefaultMariaDb"),
+                        new MySqlServerVersion(new Version(11, 5, 2)),
+                        sqlOptions => sqlOptions.SchemaBehavior(MySqlSchemaBehavior.Ignore)
+                    )
+            );
+
             return services;
         }
     }
