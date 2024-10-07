@@ -19,6 +19,10 @@ namespace Shortly.Infrastructure.Persistence.DbContexts.EntityConfiguration
                 .IsRequired()
                 .HasColumnType("text");
 
+            builder.Property(su => su.ShortenedUrl)
+                .IsRequired()
+                .HasColumnType("text");
+
             builder.Property(su => su.CreationDate)
                 .IsRequired()
                 .HasColumnType("datetime");
