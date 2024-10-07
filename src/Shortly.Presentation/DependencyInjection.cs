@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Shortly.Infrastructure.Persistence.DbContexts;
+using Shortly.Presentation.Common.Mappers;
 
 namespace Shortly.Presentation
 {
@@ -10,6 +11,14 @@ namespace Shortly.Presentation
             services.AddControllers();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
+            services.AddMappers();
+
+            return services;
+        }
+
+        private static IServiceCollection AddMappers(this IServiceCollection services)
+        {
+            services.AddScoped<UrlMapper>();
 
             return services;
         }
