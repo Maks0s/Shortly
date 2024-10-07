@@ -1,4 +1,7 @@
-﻿namespace Shortly.Presentation
+﻿using Microsoft.EntityFrameworkCore;
+using Shortly.Infrastructure.Persistence.DbContexts;
+
+namespace Shortly.Presentation
 {
     public static class DependencyInjection
     {
@@ -9,6 +12,16 @@
             services.AddSwaggerGen();
 
             return services;
+        }
+
+        public static void ApplyDbMigrations(this IApplicationBuilder app)
+        {
+            using IServiceScope scope = app.ApplicationServices.CreateScope();
+
+            using ShortUrlDbContext dbContext =
+                scope.ServiceProvider.GetRequiredService<ShortUrlDbContext>();
+
+            dbContext.Database.Migrate();
         }
     }
 }
