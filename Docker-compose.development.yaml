@@ -1,0 +1,37 @@
+version: '3.9'
+
+volumes:
+  ShortlyMariaDb:
+
+networks:
+  my-network:
+    driver: bridge
+
+services:
+  shortly-mariadb:
+    container_name: "Shortly.MariaDb"
+    image: "mariadb:latest"
+    env_file:
+      - mariadbconfig.env
+    ports:
+      - "3307:3306"
+    volumes:
+      - ShortlyMariaDb:/var/lib/mysql
+    networks:
+      - my-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      retries: 5
+      start_period: 60s
+      timeout: 10s
+
+  adminer:
+    container_name: "adminer"
+    image: "adminer"
+    ports:
+      - 5555:8080
+    networks:
+      - my-network
+    depends_on:
+      - shortly-mariadb

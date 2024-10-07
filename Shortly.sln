@@ -13,6 +13,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shortly.Application", "src\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shortly.Infrastructure", "src\Shortly.Infrastructure\Shortly.Infrastructure.csproj", "{6BA655CE-D272-4967-9281-343A44DA3396}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{435FE087-308C-42F1-B6D4-B2E09DFD9BF4}"
+	ProjectSection(SolutionItems) = preProject
+		Docker-compose.development.yaml = Docker-compose.development.yaml
+		mariadbconfig.env = mariadbconfig.env
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
