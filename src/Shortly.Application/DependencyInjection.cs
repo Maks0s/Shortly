@@ -1,5 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using FluentValidation;
+using Microsoft.Extensions.DependencyInjection;
 using Shortly.Application.Common.Behaviors;
+using System.Reflection;
 
 namespace Shortly.Application
 {
@@ -12,7 +14,11 @@ namespace Shortly.Application
                 cfg.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly);
 
                 cfg.AddOpenBehavior(typeof(LoggingBehavior<,>));
+                cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));
             });
+
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+            ValidatorOptions.Global.LanguageManager.Enabled = false;
 
             return services;
         }
