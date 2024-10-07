@@ -3,6 +3,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Shortly.Infrastructure.Persistence.DbContexts;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+using Shortly.Application.Common.Interfaces.Infrastructure.Persistence;
+using Shortly.Infrastructure.Persistence.Repositories;
 
 namespace Shortly.Infrastructure
 {
@@ -30,6 +32,8 @@ namespace Shortly.Infrastructure
                         sqlOptions => sqlOptions.SchemaBehavior(MySqlSchemaBehavior.Ignore)
                     )
             );
+
+            services.AddScoped<IShortUrlRepository, ShortUrlRepository>();
 
             return services;
         }
