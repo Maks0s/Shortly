@@ -42,7 +42,7 @@ namespace Shortly.Presentation.Controllers.ShortUrls
         [Route("urls")]
         public async Task<ActionResult<List<UrlResponse>>> GetAllUrls()
         {
-            var getAllQuery = new GetAllQuery();
+            var getAllQuery = new GetAllUrlsQuery();
 
             var getAllResult = await _sender.Send(getAllQuery);
 

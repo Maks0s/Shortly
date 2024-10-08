@@ -5,18 +5,18 @@ using Shortly.Domain.Entities;
 
 namespace Shortly.Application.ShortUrls.CQRS.Queries.GetAll
 {
-    public class GetAllQueryHandler
-        : IQueryHandler<GetAllQuery, List<ShortUrl>>
+    public class GetAllUrlsQueryHandler
+        : IQueryHandler<GetAllUrlsQuery, List<ShortUrl>>
     {
         private readonly IShortUrlRepository _shortUrlRepository;
 
-        public GetAllQueryHandler(IShortUrlRepository shortUrlRepository)
+        public GetAllUrlsQueryHandler(IShortUrlRepository shortUrlRepository)
         {
             _shortUrlRepository = shortUrlRepository;
         }
 
         public async Task<ErrorOr<List<ShortUrl>>> Handle(
-                GetAllQuery query, 
+                GetAllUrlsQuery query, 
                 CancellationToken cancellationToken
             )
         {

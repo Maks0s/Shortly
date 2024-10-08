@@ -3,5 +3,5 @@ using Shortly.Domain.Entities;
 
 namespace Shortly.Application.ShortUrls.CQRS.Queries.GetAll
 {
-    public record GetAllQuery() : IQuery<List<ShortUrl>>;
+    public record GetAllUrlsQuery() : IQuery<List<ShortUrl>>;
 }
