@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Shortly.Application.ShortUrls.CQRS.Commands.Update;
 using Shortly.Application.ShortUrls.CQRS.Queries.GetAll;
 using Shortly.Application.ShortUrls.CQRS.Queries.GetById;
 using Shortly.Presentation.Common.DTOs.UrlDTOs;
@@ -65,6 +66,22 @@ namespace Shortly.Presentation.Controllers.ShortUrls
 
             return getOriginalUrlResult.Match(
                     url => Redirect(url),
+                    errors => Problem(errors)
+                );
+        }
+
+        [HttpPut]
+        [Route("{shortUrlKey}")]
+        public async Task<ActionResult<UrlResponse>> UpdateShortUlr(string shortUrlKey)
+        {
+            var updateUrlCommand = new UpdateShortUrlCommand(shortUrlKey);
+
+            var updateUrlResult = await _sender.Send(updateUrlCommand);
+
+            return updateUrlResult.Match(
+                    updated => Ok(
+                            _mapper.MapToUrlResponse(updated)
+                        ),
                     errors => Problem(errors)
                 );
         }
