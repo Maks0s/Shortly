@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Shortly.Application.ShortUrls.CQRS.Commands.Delete;
 using Shortly.Application.ShortUrls.CQRS.Commands.Update;
 using Shortly.Application.ShortUrls.CQRS.Queries.GetAll;
 using Shortly.Application.ShortUrls.CQRS.Queries.GetById;
@@ -72,7 +73,7 @@ namespace Shortly.Presentation.Controllers.ShortUrls
 
         [HttpPut]
         [Route("{shortUrlKey}")]
-        public async Task<ActionResult<UrlResponse>> UpdateShortUlr(string shortUrlKey)
+        public async Task<ActionResult<UrlResponse>> UpdateShortUrl(string shortUrlKey)
         {
             var updateUrlCommand = new UpdateShortUrlCommand(shortUrlKey);
 
@@ -82,6 +83,20 @@ namespace Shortly.Presentation.Controllers.ShortUrls
                     updated => Ok(
                             _mapper.MapToUrlResponse(updated)
                         ),
+                    errors => Problem(errors)
+                );
+        }
+
+        [HttpDelete]
+        [Route("{shortUrlKey}")]
+        public async Task<ActionResult> DeleteShortUrl(string shortUrlKey)
+        {
+            var deleteUrlCommand = new DeleteShortUrlCommand(shortUrlKey);
+
+            var deleteUrlResult = await _sender.Send(deleteUrlCommand);
+
+            return deleteUrlResult.Match(
+                    success => NoContent(),
                     errors => Problem(errors)
                 );
         }
