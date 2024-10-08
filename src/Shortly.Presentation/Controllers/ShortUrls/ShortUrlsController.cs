@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Shortly.Application.ShortUrls.CQRS.Queries.GetAll;
 using Shortly.Presentation.Common.DTOs.UrlDTOs;
 using Shortly.Presentation.Common.Mappers;
 using Shortly.Presentation.Controllers.Common;
@@ -33,6 +34,22 @@ namespace Shortly.Presentation.Controllers.ShortUrls
                             "mock",
                             _mapper.MapToUrlResponse(added)
                         ),
+                    errors => Problem(errors)
+                );
+        }
+
+        [HttpGet]
+        [Route("urls")]
+        public async Task<ActionResult<List<UrlResponse>>> GetAllUrls()
+        {
+            var getAllQuery = new GetAllQuery();
+
+            var getAllResult = await _sender.Send(getAllQuery);
+
+            return getAllResult.Match(
+                    received => Ok(
+                        _mapper.MapToCollectionOfUrlResponses(received)
+                    ),
                     errors => Problem(errors)
                 );
         }
