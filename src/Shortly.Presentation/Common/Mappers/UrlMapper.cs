@@ -12,5 +12,6 @@ namespace Shortly.Presentation.Common.Mappers
         public partial AddShortUrlCommand MapToAddShortUrlCommand(UrlRequest urlRequest);
 
         public partial UrlResponse MapToUrlResponse(ShortUrl shortUrl);
+        public partial List<UrlResponse> MapToCollectionOfUrlResponses(List<ShortUrl> shortUrls);
     }
 }
