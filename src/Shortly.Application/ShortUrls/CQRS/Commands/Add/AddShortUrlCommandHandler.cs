@@ -37,13 +37,13 @@ namespace Shortly.Application.ShortUrls.CQRS.Commands.Add
                 await _urlShorteningService
                     .GenerateShortenedUrlKeyAsync();
 
-            string ShortenedUrl = $"{_configuration["BaseUrl"]}/{shortenedUrlKey}";
+            string shortenedUrl = $"{_configuration["BaseUrl"]}/{shortenedUrlKey}";
 
             var urlToAdd = new ShortUrl()
             {
                 ShortenedUrlKey = shortenedUrlKey,
                 OriginalUrl = command.OriginalUrl,
-                ShortenedUrl = ShortenedUrl,
+                ShortenedUrl = shortenedUrl,
                 CreationDate = DateTime.UtcNow,
                 TransitionCount = 0
             };
