@@ -38,6 +38,8 @@ try
 
     app.ApplyDbMigrations();
 
+    app.UseCors("AllowAll");
+
     if (app.Environment.IsDevelopment())
     {
         app.UseSwagger();

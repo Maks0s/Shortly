@@ -12,6 +12,16 @@ namespace Shortly.Presentation
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
             services.AddMappers();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll",
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin()
+                               .AllowAnyMethod()
+                               .AllowAnyHeader();
+                    });
+            });
 
             return services;
         }

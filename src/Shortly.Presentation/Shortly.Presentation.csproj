@@ -21,4 +21,8 @@
     <ProjectReference Include="..\Shortly.Infrastructure\Shortly.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\css\" />
+  </ItemGroup>
+
 </Project>
